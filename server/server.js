@@ -18,10 +18,12 @@ MongoClient.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
     const sequencesRouter = createRouter(sequencesCollection);
     app.use("/api/sequences", sequencesRouter);
     if (process.env.NODE_ENV === 'production') {
-      app.use(express.static(__dirname + '/public'));
-      app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+      app.use(express.static('client/build'));
+      app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', ''));
+      })
   
-      let port_number = process.env.PORT || 3001;
+      const port_number = process.env.PORT || 3001;
       app.listen(port_number);
     }
   })
