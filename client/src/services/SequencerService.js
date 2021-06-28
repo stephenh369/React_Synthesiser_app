@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3001/api/sequences/'
+const baseURL = '/api/sequences/'
 
 export default {
     getSequences(){
